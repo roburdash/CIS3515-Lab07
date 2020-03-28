@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">BookShelf</string>
+    <string-array name="book_titles">
+        <item>LITTLE FIRES EVERYWHERE</item>
+        <item>THE TATTOOIST OF AUSCHWITZ</item>
+        <item>NORMAL PEOPLE</item>
+        <item>THE HUNTING PARTY</item>
+        <item>THE OUTSIDER</item>
+        <item>THEN SHE WAS GONE</item>
+        <item>THE WOMAN IN THE WINDOW</item>
+        <item>BEFORE WE WERE YOURS</item>
+        <item>THE OVERSTORY</item>
+        <item>ELEANOR OLIPHANT IS COMPLETELY FINE</item>
+    </string-array>
+    <string-array name="book_authors">
+        <item>Celeste Ng</item>
+        <item>Heather Morris</item>
+        <item>Sally Rooney</item>
+        <item>Lucy Foley</item>
+        <item>Stephen King</item>
+        <item>Lisa Jewell</item>
+        <item>AJ Finn</item>
+        <item>Lisa Wingate</item>
+        <item>Richard Powers</item>
+        <item>Gail Honeyman</item>
+    </string-array>
+</resources>
