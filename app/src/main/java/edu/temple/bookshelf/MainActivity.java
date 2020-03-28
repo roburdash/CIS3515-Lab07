@@ -1,42 +1,51 @@
 package edu.temple.bookshelf;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.fragment.app.FragmentManager;
 import android.os.Bundle;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements BookListFragment.GetBookInterface{
+
+
+    boolean singleVis;          //boolean for both fragments visible
+    BookDetailsFragment bdf;    //book details fragment
+    FragmentManager fm;         //fragment manager
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        
+        //determine if all panes are visible and store to boolean
+        singleVis = (findViewById(R.id.container_details)) != null;
+        bdf = new BookDetailsFragment();
+
+        //load fragment manager and place book list into container list
+        fm = getSupportFragmentManager();
+        fm.beginTransaction().replace(R.id.container_list, new BookListFragment()).commit();
+
+        //if both fragments should be visible load details into details container
+        if(!singleVis){
+            fm.beginTransaction().replace(R.id.container_details, bdf);
+        }// end if(!singleVis)
     }
 
-    //method to load bookshelf from string resource
-    private ArrayList<Map<String, String>> loadShelf(){
+    @Override
+    public void bookSelected(HashMap book){
 
-        ArrayList<Map<String, String>> bookShelf = new ArrayList<Map<String, String>>();    //array list to act as shelf
-        Map<String, String> book = new HashMap<>();                              //hash map to act as book
-        String[] bookKeys = this.getResources().getStringArray(R.array.book_titles);                //string array of authors
-        String[] bookValues = this.getResources().getStringArray(R.array.book_authors);             //string array of titles
+        if(singleVis) {
 
-        //loop to populate array list
-        for(int i = 0; i < bookKeys.length; ++i){
+            BookDetailsFragment newFrag = BookDetailsFragment.newInstance(book);
+            fm.beginTransaction().replace(R.id.container_list, newFrag).addToBackStack(null).commit();
 
-            book.put(bookKeys[i], bookValues[i]);
-            bookShelf.add(book);
-            book.clear();
-        }// end for(int i = 0; i < bookKeys.length; ++i)
+        } else {
 
-        return bookShelf;
+            bdf.displayBook(book);
+        }
     }
-
 }
 
 
